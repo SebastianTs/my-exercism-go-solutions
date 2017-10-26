@@ -1,0 +1,5 @@
+goos: linux
+goarch: amd64
+BenchmarkAccumulate-4   	  300000	      4648 ns/op
+PASS
+ok  	_/home/sebastian/exercism/go/accumulate	1.444s
