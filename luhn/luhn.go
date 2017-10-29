@@ -6,7 +6,8 @@ import (
 
 const testVersion = 2
 
-// cleanText removes all characters that are not Numbers
+// cleanText removes all characters that are not Numbers or Spaces
+// returns not ok when antoher character is read
 func cleanText(in string) (out []int, ok bool) {
 	for _, v := range in {
 		if unicode.IsNumber(v) {
@@ -20,6 +21,7 @@ func cleanText(in string) (out []int, ok bool) {
 	return out, true
 }
 
+// Valid checks if a given string is valid using the luhn algorithm
 func Valid(in string) bool {
 	nb, ok := cleanText(in)
 	if !ok {
