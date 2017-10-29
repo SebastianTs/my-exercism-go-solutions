@@ -10,7 +10,7 @@ func SumMultiples(ds ...int) func(max int) int {
 				sum++
 			}
 		}
-		return sum
+		return sumcd 
 	}
 }
 
