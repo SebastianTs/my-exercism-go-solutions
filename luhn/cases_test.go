@@ -8,7 +8,11 @@ var testCases = []struct {
 	description string
 	input       string
 	ok          bool
-}{
+}{{
+	"Wikipedia example",
+	"79927398713",
+	true,
+},
 	{
 		"single digit strings can not be valid",
 		"1",
