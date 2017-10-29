@@ -19,24 +19,18 @@ func Frequency(s string) FreqMap {
 
 // ConcurrentFrequency counts the letters of more than one text in parallel
 func ConcurrentFrequency(s []string) FreqMap {
-	c := make(chan int, len(s))
-	interimList := make([]FreqMap, len(s))
+	c := make(chan FreqMap, len(s))
 
-	for i := 0; i < len(s); i++ {
-		go func(s string, i int, c chan int) {
-			interimList[i] = Frequency(s)
-			c <- 1
-		}(s[i], i, c)
+	for _, t := range s {
+		t := t
+		go func() {
+			c <- Frequency(t)
+		}()
 	}
+	result := <-c
 
-	for i := 0; i < len(s); i++ {
-		<-c
-	}
-	// merge results
-	result := FreqMap{}
-	for _, m := range interimList {
-		for k, v := range m {
-			fmt.Println(k, v)
+	for i := 0; i < len(s)-1; i++ {
+		for k, v := range <-c {
 			result[k] += v
 		}
 	}
