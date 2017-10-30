@@ -1,3 +1,4 @@
+// Package protein implements the protein exercise
 package protein
 
 const testVersion = 1
