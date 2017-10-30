@@ -2,7 +2,7 @@ package protein
 
 const testVersion = 1
 
-// FromCondon translates one RNA sequence to Proteins
+// FromCondon translates one RNA Codons to Proteins
 func FromCodon(in string) string {
 	var m map[string]string = map[string]string{
 		"AUG": "Methionine",
