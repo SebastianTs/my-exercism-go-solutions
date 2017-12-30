@@ -17,12 +17,13 @@ func Detect(subject string, candidates []string) (result []string) {
 func isAnagram(subject string, candidate string) bool {
 	subject = strings.ToLower(subject)
 	candidate = strings.ToLower(candidate)
+	subjectSorted := SortString(subject)
 	switch {
 	case len(subject) != len(candidate):
 		return false
 	case subject == candidate:
 		return false
-	case SortString(subject) == SortString(candidate):
+	case subjectSorted == SortString(candidate):
 		return true
 	default:
 		return false
