@@ -32,9 +32,14 @@ func (s Set) String() string {
 	return out + "}"
 }
 
+// Length returns the number of elements a set contains
+func (s Set) Length() int {
+	return len(s.data)
+}
+
 // IsEmpty is true if an Set is Empty
 func (s Set) IsEmpty() bool {
-	return len(s.data) == 0
+	return s.Length() == 0
 }
 
 // Has checks if the given element is in the set
@@ -75,7 +80,7 @@ func Disjoint(s1, s2 Set) bool {
 
 // Equal is true when the given sets have (only) the same elements
 func Equal(s1, s2 Set) bool {
-	if len(s1.data) != len(s2.data) {
+	if s1.Length() != s2.Length() {
 		return false
 	}
 	for k := range s1.data {
