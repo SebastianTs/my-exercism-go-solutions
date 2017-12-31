@@ -116,9 +116,18 @@ func Difference(s1, s2 Set) Set {
 	return difference
 }
 
+// Clone clone a set and create a new one
+func Clone(s Set) Set {
+	s1 := New()
+	for key := range s.data {
+		s1.Add(key)
+	}
+	return s1
+}
+
 // Union returns the union of two sets
 func Union(s1, s2 Set) Set {
-	union := s1
+	union := Clone(s1)
 	for k := range s2.data {
 		union.Add(k)
 	}
