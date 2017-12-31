@@ -105,7 +105,7 @@ func Intersection(s1, s2 Set) Set {
 // Difference returns the difference of s1 and s2
 func Difference(s1, s2 Set) Set {
 	difference := New()
-	if len(s1.data) == 0 {
+	if s1.IsEmpty() {
 		return difference
 	}
 	for k := range s1.data {
