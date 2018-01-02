@@ -23,7 +23,7 @@ func Latenize(in string) string {
 		} else if (s == 'y' || s == 'x') && (i < len(in)-1 && !isVowel(in[i+1])) {
 			out = in[i:] + in[:i]
 			break
-		} else if s == 'y' && i == 1 {
+		} else if s == 'y' && i == 1 && len(in) == 2 {
 			out = in[i:] + in[:i]
 			break
 		}
