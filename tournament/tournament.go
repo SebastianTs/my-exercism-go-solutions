@@ -9,11 +9,11 @@ import (
 )
 
 type tally struct {
-	m       map[string]*result
+	m       map[string]*board
 	ranking []string
 }
 
-type result struct {
+type board struct {
 	mp int // MP: Matches Played
 	w  int //  W: Matches Won
 	d  int //  D: Matches Drawn (Tied)
@@ -50,9 +50,9 @@ func Tally(r io.Reader, w io.Writer) error {
 
 // trackResult keeps track of the results
 func (t *tally) trackResult(first, second, res string) error {
-	winR := result{w: 1, p: 3}
-	lossR := result{l: 1}
-	drawR := result{d: 1, p: 1}
+	winR := board{w: 1, p: 3}
+	lossR := board{l: 1}
+	drawR := board{d: 1, p: 1}
 
 	switch res {
 	case "win":
@@ -70,23 +70,23 @@ func (t *tally) trackResult(first, second, res string) error {
 }
 
 // save is used to save the result of an team
-func (t *tally) save(team string, res result) {
+func (t *tally) save(team string, b board) {
 	if r, ok := t.m[team]; ok {
-		//r.mp += res.mp
-		r.w += res.w
-		r.d += res.d
-		r.l += res.l
-		r.p += res.p
+		//r.mp += b.mp
+		r.w += b.w
+		r.d += b.d
+		r.l += b.l
+		r.p += b.p
 	} else { // team not in map
-		t.m[team] = &res
+		t.m[team] = &b
 	}
 	cur := t.m[team]
 	cur.mp++
 }
 
-// newTally returns a new Tally object
+// newTally returns a new Tally
 func newTally() tally {
-	return tally{m: make(map[string]*result)}
+	return tally{m: make(map[string]*board)}
 }
 
 // rank is used to generate the ranked list when all data was saved
@@ -116,13 +116,12 @@ func (t *tally) rank() {
 	}
 }
 
-// Write is used to present the output in a text file
+// Write is used to present the output
 func (t *tally) Write(w io.Writer) {
 	out := fmt.Sprintf("%-31s| MP |  W |  D |  L |  P\n", "Team")
 	for _, name := range t.ranking {
 		r := t.m[name]
 		out += fmt.Sprintf("%-31s| %2d | %2d | %2d | %2d | %2d\n", name, r.mp, r.w, r.d, r.l, r.p)
 	}
-	b := []byte(out)
-	w.Write(b)
+	io.WriteString(w, out)
 }
