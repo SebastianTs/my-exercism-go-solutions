@@ -3,10 +3,10 @@ package atbash
 import "strings"
 
 const groupSize = 5
+const offset = 'z' - 'a'
 
 func Atbash(str string) (result string) {
 	str = strings.ToLower(str)
-	offset := 'z' - 'a'
 	i := 0
 	for _, c := range str {
 		switch {
