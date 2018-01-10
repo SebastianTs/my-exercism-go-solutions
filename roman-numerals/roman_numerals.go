@@ -6,7 +6,6 @@ func ToRomanNumeral(n int) (out string, err error) {
 	if n < 1 || n > 3000 {
 		return "", errors.New("Input out of Range")
 	}
-
 	rn := []string{"I", "V", "X", "L", "C", "D", "M"}
 	i := 0
 	for n > 0 {
@@ -34,5 +33,4 @@ func ToRomanNumeral(n int) (out string, err error) {
 		i += 2
 	}
 	return out, nil
-
 }
