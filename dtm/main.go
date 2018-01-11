@@ -1,8 +1,10 @@
 package main
 
-/* This program simulates a DTM M = ({z_0,z_1,z_2}, {a,b}, {a,b,␣}, \delta, z_0, {z_2}),
-   with one tape and prints its contents after each step. The maschine holds for the given
-   input "aabba" this must not be the case for antoher input.
+/*
+	This program simulates a DTM M = ({z_0,z_1,z_2}, {a,b}, {a,b,␣}, \delta, z_0, {z_2}),
+   	with one tape and prints its contents after each step. The maschine holds for the given
+   	input "aabba" this must not be the case for another input.
+   	An DTM accepts if it holds or it reaches a finite state, the first condition is not implemented here.
 */
 
 import (
@@ -55,6 +57,7 @@ func main() {
 				state = 0
 			}
 		case 2:
+			// finite state
 			done = true
 		}
 
