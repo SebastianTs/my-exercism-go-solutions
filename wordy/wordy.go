@@ -11,6 +11,13 @@ const num string = `-?\d+`
 
 type operator func(a, b int) int
 
+var operators = map[string]operator{
+	"plus":          plus,
+	"minus":         minus,
+	"multiplied by": mult,
+	"divided by":    div,
+}
+
 func Answer(question string) (int, bool) {
 	ops := strings.Join(getOps(), "|")
 	parseRegex := fmt.Sprintf(`^What is (%s)((?: (?:%s) %s)+)\?$`, num, ops, num)
@@ -36,13 +43,6 @@ func getOps() []string {
 		opsList = append(opsList, k)
 	}
 	return opsList
-}
-
-var operators = map[string]operator{
-	"plus":          plus,
-	"minus":         minus,
-	"multiplied by": mult,
-	"divided by":    div,
 }
 
 func plus(a, b int) int {
