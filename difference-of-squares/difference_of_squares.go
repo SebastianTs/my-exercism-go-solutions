@@ -10,8 +10,7 @@ func SquareOfSums(n int) int {
 }
 
 // SumOfSquares returns the sum of the squares of a given number n
-func SumOfSquares(n int) int {
-	sum := 0
+func SumOfSquares(n int) (sum int) {
 	for i := 1; i <= n; i++ {
 		sum += i * i
 	}
